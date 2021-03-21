@@ -13,6 +13,10 @@ steps:
       from_secret: session_name
       
   commands:
+  - sudo apt-get update
+  - sudo apt install docker.io -y
+  - sudo systemctl start docker
+  - sudo systemctl enable docker
   - git clone https://github.com/dashezup/tgvc-userbot -b dev source
   - cd source
   - docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t vcbot 
