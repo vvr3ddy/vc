@@ -1,0 +1,18 @@
+kind: pipeline
+name: default
+
+steps:
+- name: test
+  image: python
+  environment:
+    API_ID:
+      from_secret: api_id
+    API_HASH:
+      from_secret: api_hash
+    SESSION_NAME:
+      from_secret: session_name
+      
+  commands:
+  - git clone https://github.com/dashezup/tgvc-userbot/tree/dev source
+  - cd source
+  - docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t vcbot 
